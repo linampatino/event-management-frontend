@@ -1,0 +1,25 @@
+<H2>Upcomming Events</H2>
+<br>
+    <table class="table table-sm table-responsive-md">
+      <thead>
+        <tr>
+          <th scope="col">Event Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Venue</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor= "let event of events">
+          <th scope="row" >{{event.name}} </th>
+          <td>{{event.date}}</td>
+          <td>{{event.venue.name}}</td>
+          <td>{{event.venue.city}}</td>
+          <td>{{event.venue.state}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+
+
