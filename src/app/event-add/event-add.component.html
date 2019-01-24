@@ -7,54 +7,53 @@
     </button>
   </div>
   
-  <form (ngSubmit)="save()">
+  <form [formGroup]="eventForm" (ngSubmit)="save()">
   <div class="modal-body">
-	
-		<div class="form-row"> <label>Event information</label></div>
-		  
-		<div class="form-row">
-			<div class="form-group">
-				<label for="eventName">Name</label>
-				<input type="text" class="form-control" id="eventName" name="eventName"  [formControl]="eventName" placeholder="Barcelona Vs Real Madrid">
-			</div>
-		</div>
 		
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="eventDate">Date</label>
-				<div class="form-group col-md-6">
+		<!--<div formGroupName="eventInformation"> -->
+			<div class="form-row"> <label>Event information</label></div>
+				
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="eventName">Name</label>
+					<input type="text" class="form-control" id="eventName" name="eventName"  formControlName="eventName" placeholder="Barcelona Vs Real Madrid">
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="eventDate">Date</label>
 					<div class="input-group">
-						<input class="form-control" id="eventDate" name="eventDate" placeholder="yyyy-mm-dd"  [formControl]="eventDate" ngbDatepicker #dp="ngbDatepicker">
+						<input class="form-control" id="eventDate" name="eventDate" placeholder="yyyy-mm-dd"  formControlName="eventDate" ngbDatepicker #dp="ngbDatepicker">
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
 						</div>
 					</div>
 				</div>
-		    </div>
-		
-			<div class="form-group col-md-6">
+			</div>
+						
+			<div class="form-row col-md-12">
 				<label for="inputPassword4">Time</label>
-				<ngb-timepicker id="eventTime" name="eventTime" [formControl]="eventTime"></ngb-timepicker>
-		    </div>
-		</div>
-		  
-		<div class="form-row"> <label>Venue information</label></div>
-		<div class="form-row">
-			<div class="col">
-				<input type="text" class="form-control" id="venueName" name="venueName"  [formControl]="venueName" placeholder="Venue Name">
+				<ngb-timepicker id="eventTime" name="eventTime" formControlName="eventTime"></ngb-timepicker>
 			</div>
-		    <div class="col">
-				<input type="text" class="form-control" id="venueCity" name="venueCity"   [formControl]="venueCity" placeholder="Venue City">
-		    </div>
-		    <div class="col">
-		        <input type="text" class="form-control" id="venueState" name="venueState"  [formControl]="venueState" placeholder="Venue State">
+
+			<div class="form-row"> <label>Venue information</label></div>
+			<div class="form-row">
+				<div class="col">
+					<input type="text" class="form-control" id="venueName" name="venueName"  formControlName="venueName" placeholder="Venue Name">
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" id="venueCity" name="venueCity"   formControlName="venueCity" placeholder="Venue City">
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" id="venueState" name="venueState"  formControlName="venueState" placeholder="Venue State">
+				</div>
 			</div>
-		</div>
 		
   </div>
   
   <div class="modal-footer">
-    <button type="submit" class="btn btn-outline-dark">Save</button>
+    <button type="submit" class="btn btn-outline-dark" [disabled]="!eventForm.valid">Save</button>
   </div>
   
   	</form>
