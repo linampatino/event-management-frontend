@@ -5,7 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Prerequisites
 
-Node.js
 Angular requires Node.js version 8.x or 10.x.
 To get Node.js, go to nodejs.org.
 
