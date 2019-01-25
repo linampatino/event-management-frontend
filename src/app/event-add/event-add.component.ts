@@ -56,7 +56,8 @@ export class EventAddComponent implements OnInit {
         }
        
        getEvents(){
-           this.router.navigate(['/event-list']);
+           this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(()=>
+           this.router.navigate(["/event-list"])); 
        }
        
       save(){

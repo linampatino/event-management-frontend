@@ -8,18 +8,18 @@ import { Observable } from 'rxjs';
 
 export class EventsService {
 
-  public URL = '//localhost:8080';
+  public const URL = '//localhost:8080';
 
   constructor(private http: HttpClient) { 
   }
   
     getEvents(): Observable<any> {
-  	  return this.http.get('//localhost:8080/events');
+  	  return this.http.get(this.URL + '/events');
     }
 
     save(event: any): Observable<any>{
       let result: Observable<Object>;
-      result = this.http.post('//localhost:8080/event', event);
+      result = this.http.post(this.URL + '/event', event);
       return result;
     }
     
