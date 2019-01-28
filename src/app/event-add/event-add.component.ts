@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { EventsService } from '../shared/events/events.service';
@@ -18,6 +18,8 @@ import { Venue } from '../model/venue';
 export class EventAddComponent implements OnInit {
     closeResult: string;
     time = {hour: 13, minute: 30};
+    
+    @Output() createEvent = new EventEmitter<string>();
     
     eventForm = this.fb.group({
       eventName: ['', Validators.required],
@@ -41,7 +43,7 @@ export class EventAddComponent implements OnInit {
           this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
           }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            this.closeResult = `${this.getDismissReason(reason)}`;
           });
         }
 
@@ -51,13 +53,12 @@ export class EventAddComponent implements OnInit {
           } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
             return 'by clicking on a backdrop';
           } else {
-            return  `with: ${reason}`;
+            return  ` ${reason}`;
           }
         }
        
-       getEvents(){
-           this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(()=>
-           this.router.navigate(["/event-list"])); 
+       addEventToListComponent(event){
+          this.createEvent.emit(event);
        }
        
       save(){
@@ -81,7 +82,7 @@ export class EventAddComponent implements OnInit {
         event.venue = venue;
         
         this.eventService.save(event).subscribe(result => {
-          this.getEvents();
+          this.addEventToListComponent(event)
           this.getDismissReason('Success');
           this.modalService.dismissAll('Success');
         },

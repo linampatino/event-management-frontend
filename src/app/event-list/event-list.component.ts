@@ -9,11 +9,17 @@ import { Event } from '../model/event';
 })
 export class EventListComponent implements OnInit {
   events: Array<Event>;
-  
+  message = '';
+
   constructor(private eventsService: EventsService) { }
 
   ngOnInit() {
   	this.eventsService.getEvents().subscribe(data => {this.events = data })
   }
 
+  addEvent($event) {
+      //this.message = $event
+      this.events.unshift($event);
+    }
+  
 }
